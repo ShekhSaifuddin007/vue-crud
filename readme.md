@@ -9,14 +9,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
  - clone this repository.
  
- - ~git clone https://github.com/ShekhSaifuddin007/vue-crud.git~
+ - `git clone https://github.com/ShekhSaifuddin007/vue-crud.git`
  
- copy ~.env.example file~ and create a ~.env file~
+ copy `.env.example file~ and create a ~.env file`
  
  - setup database.
  
- - Run ~composer install~
+ - Run `composer install`
  
- - Then ~npm install~
+ - Then `npm install`
  
  Not completed yet stay tune ☺💙💜
