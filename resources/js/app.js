@@ -10,6 +10,12 @@ import Vue from 'vue';
 
 import VueProgressBar from 'vue-progressbar';
 
+import Notify, { SnotifyPosition } from 'vue-snotify';
+
+import { Form, HasError, AlertError } from 'vform'
+
+window.Form = Form;
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,14 +27,26 @@ import VueProgressBar from 'vue-progressbar';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('student-component', require('./components/StudentComponent.vue').default);
-Vue.component('pagination-component', require('./components/partial/PaginationComponent').default);
+
+// Global Components
+Vue.component('students', require('./components/StudentComponent.vue').default);
+Vue.component('pagination', require('./components/partial/PaginationComponent').default);
+
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+const notifyOptions = {
+    toast: {
+        position: SnotifyPosition.rightTop
+    }
+}
 
 const VueProgressBarOptions = {
     color: '#50d38a',
@@ -45,7 +63,7 @@ const VueProgressBarOptions = {
 };
 
 Vue.use(VueProgressBar, VueProgressBarOptions);
-
+Vue.use(Notify, notifyOptions);
 
 
 const app = new Vue({

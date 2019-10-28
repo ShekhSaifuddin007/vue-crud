@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        <student-component></student-component>
+        <students></students>
     </div>
 @endsection

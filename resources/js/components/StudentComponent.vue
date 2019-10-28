@@ -5,8 +5,13 @@
                 <div class="card">
                     <div class="card-header bg-dark" style="font-size: 20px">
                        <h3 class="card-title text-white">Students</h3>
+
                         <span style="position: absolute; right: 1rem; top: .5rem;">
-                            <button type="button" class="btn btn-primary float-right">Refresh <i class="fa fa-retweet"></i></button>
+                            <button type="button" class="btn btn-success" @click="create">
+                                Add New <i class="fa fa-plus"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-primary" @click="refresh">Refresh <i class="fa fa-retweet"></i></button>
                         </span>
                     </div>
 
@@ -30,6 +35,8 @@
                                 </div>
                             </div>
                         </form>
+
+<!--                        <filter-form></filter-form>-->
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -73,12 +80,12 @@
                                 </tbody>
                             </table>
 
-                            <pagination-component
+                            <pagination
                                 v-if="pagination.last_page > 1"
                                 :pagination="pagination"
                                 :offset="10"
                                 @paginate="query === '' ? getStudents() : searchStudents()">
-                            </pagination-component>
+                            </pagination>
 
                         </div>
                     </div>
@@ -86,13 +93,28 @@
             </div>
         </div>
 
+
+        <!-- Modal -->
+        <student-modal></student-modal>
+
         <vue-progress-bar></vue-progress-bar>
+
+        <vue-snotify></vue-snotify>
 
     </div>
 </template>
 
 <script>
+
+    import Modal from './partial/ModalComponent';
+    import Filter from './partial/FilterForm';
+
     export default {
+
+        components:{
+            "student-modal" : Modal,
+            "filter-form" : Filter,
+        },
 
         data() {
               return {
@@ -123,7 +145,8 @@
 
                 this.$Progress.start();
 
-                axios.get('/api/students?page=' + this.pagination.current_page)
+                axios
+                    .get('/api/students?page=' + this.pagination.current_page)
                     .then(response => {
                         this.students = response.data.data;
                         this.pagination = response.data.meta;
@@ -140,7 +163,7 @@
             searchStudents() {
                 this.$Progress.start();
 
-                axios.get('/api/search/students/' +this.queryField+ '/' +this.query+ '?page=' + this.pagination.current_page)
+                axios.get('/api/search/students/' + this.queryField+ '/' + this.query+ '?page=' + this.pagination.current_page)
                     .then(response => {
                         this.students = response.data.data;
                         this.pagination = response.data.meta;
@@ -152,6 +175,18 @@
 
                         this.$Progress.fail();
                     })
+            },
+
+            refresh() {
+                this.getStudents();
+                this.query = '';
+                this.queryField = 'name';
+
+                this.$snotify.success('Refreshed Successfully', 'Success');
+            },
+
+            create() {
+                $('#createStudent').modal('show');
             }
         }
     }

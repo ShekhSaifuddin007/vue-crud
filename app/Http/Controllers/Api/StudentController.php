@@ -25,7 +25,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return StudentResource
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -58,7 +58,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
      * @return StudentResource
      * @throws \Illuminate\Validation\ValidationException
@@ -95,6 +95,11 @@ class StudentController extends Controller
         return new StudentResource($student);
     }
 
+    /**
+     * @param $field
+     * @param $query
+     * @return StudentCollection
+     */
     public function search($field, $query)
     {
         return new StudentCollection(

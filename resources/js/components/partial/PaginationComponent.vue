@@ -19,6 +19,7 @@
             </li>
             <li class="page-item" :class="{ disabled: pagination.current_page >= pagination.last_page }">
                 <a class="page-link" @click.prevent="changePage(pagination.last_page)">Last</a>
+
             </li>
         </ul>
     </nav>
@@ -27,9 +28,10 @@
 <script>
     export default {
         props:['pagination', 'offset'],
+
         methods: {
             isCurrentPage(page){
-                return this.pagination.current_page === page
+                return this.pagination.current_page === page;
             },
             changePage(page) {
                 if (page > this.pagination.last_page) {
@@ -46,7 +48,7 @@
                 let from = this.pagination.current_page - Math.floor(this.offset / 2);
 
                 if (from < 1) {
-                    from = 1
+                    from = 1;
                 }
 
                 let to = from + this.offset -1;
@@ -57,10 +59,10 @@
 
                 while (from <= to) {
                     pages.push(from);
-                    from++
+                    from++;
                 }
 
-                return pages
+                return pages;
             }
         }
     }
