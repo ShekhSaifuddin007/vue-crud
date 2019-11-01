@@ -18,7 +18,7 @@ class StudentController extends Controller
     public function index()
     {
         return new StudentCollection(
-            Student::query()->latest()->paginate(10)
+            Student::query()->latest('id')->paginate(10)
         );
     }
 
