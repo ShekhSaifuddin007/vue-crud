@@ -111,13 +111,13 @@
 
 <script>
 
-    // import Modal from './partial/ModalComponent';
+    import Modal from './partial/ModalComponent';
     import Filter from './partial/FilterForm';
 
     export default {
 
         components:{
-            //"student-modal" : Modal,
+            "student-modal" : Modal,
             "filter-form" : Filter,
         },
 
