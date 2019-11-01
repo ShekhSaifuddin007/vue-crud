@@ -6,7 +6,7 @@
                     <strong>Search By : </strong>
                 </div>
                 <div class="col-md-3">
-                    <select v-model="queryField" class="form-control" id="">
+                    <select :select="field" @change="selected($event)" class="form-control" id="">
                         <option value="name">Name</option>
                         <option value="email">Email</option>
                         <option value="phone">Phone</option>
@@ -14,7 +14,7 @@
                     </select>
                 </div>
                 <div class="col-md-7">
-                    <input v-model="query" type="text" class="form-control" placeholder="Search here...">
+                    <input :value="q" @input="search($event)" type="text" class="form-control" placeholder="Search here...">
                 </div>
             </div>
         </form>
@@ -25,44 +25,19 @@
     export default {
         name: "FilterForm",
 
-        props : ['queryField', 'query'],
+        props : ['field', 'q'],
 
-        data() {
-
-            return {
-                query : '',
-
-                queryField : 'name',
-            }
-
-        },
-
-        watch : {
-            query : function (newQuery, oldQuery) {
-                newQuery === '' ?  this.getStudents() : this.searchStudents();
-            }
-        },
-
-        methods : {
-
-            searchStudents() {
-                this.$Progress.start();
-
-                axios.get('/api/search/students/' + this.queryField+ '/' + this.query+ '?page=' + this.pagination.current_page)
-                    .then(response => {
-                        this.students = response.data.data;
-                        this.pagination = response.data.meta;
-
-                        this.$Progress.finish();
-                    })
-                    .catch(e => {
-                        console.log(e);
-
-                        this.$Progress.fail();
-                    })
+        methods: {
+            search(search) {
+                this.query = search.target.value;
+                this.$emit('searching', this.query)
             },
 
-        }
+            selected(field) {
+                this.queryField = field.target.value;
+                this.$emit('selected', this.queryField)
+            }
+        },
     }
 </script>
 

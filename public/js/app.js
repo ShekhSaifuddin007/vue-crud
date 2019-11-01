@@ -1946,6 +1946,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1991,9 +1996,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      axios.get('/api/search/students/' + this.queryField + '/' + this.query + '?page=' + this.pagination.current_page).then(function (response) {
+      axios.get('/api/search/students/' + this.queryField + '/' + this.query).then(function (response) {
         _this2.students = response.data.data;
-        _this2.pagination = response.data.meta;
 
         _this2.$Progress.finish();
       })["catch"](function (e) {
@@ -2050,33 +2054,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FilterForm",
-  props: ['queryField', 'query'],
-  data: function data() {
-    return {
-      query: '',
-      queryField: 'name'
-    };
-  },
-  watch: {
-    query: function query(newQuery, oldQuery) {
-      newQuery === '' ? this.getStudents() : this.searchStudents();
-    }
-  },
+  props: ['field', 'q'],
   methods: {
-    searchStudents: function searchStudents() {
-      var _this = this;
-
-      this.$Progress.start();
-      axios.get('/api/search/students/' + this.queryField + '/' + this.query + '?page=' + this.pagination.current_page).then(function (response) {
-        _this.students = response.data.data;
-        _this.pagination = response.data.meta;
-
-        _this.$Progress.finish();
-      })["catch"](function (e) {
-        console.log(e);
-
-        _this.$Progress.fail();
-      });
+    search: function search(_search) {
+      this.query = _search.target.value;
+      this.$emit('searching', this.query);
+    },
+    selected: function selected(field) {
+      this.queryField = field.target.value;
+      this.$emit('selected', this.queryField);
     }
   }
 });
@@ -39219,167 +39205,104 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("form", { staticClass: "mb-3" }, [
-                _c("div", { staticClass: "row" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-3" }, [
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c("filter-form", {
+                  attrs: { q: _vm.query, field: _vm.queryField },
+                  on: {
+                    searching: function($event) {
+                      _vm.query = $event
+                    },
+                    selected: function($event) {
+                      _vm.queryField = $event
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "table-responsive" },
+                  [
                     _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.queryField,
-                            expression: "queryField"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.queryField = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
+                      "table",
+                      { staticClass: "table table-bordered table-hover" },
                       [
-                        _c("option", { attrs: { value: "name" } }, [
-                          _vm._v("Name")
-                        ]),
+                        _vm._m(0),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "email" } }, [
-                          _vm._v("Email")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "phone" } }, [
-                          _vm._v("Phone")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "address" } }, [
-                          _vm._v("Address")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-7" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.query,
-                          expression: "query"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", placeholder: "Search here..." },
-                      domProps: { value: _vm.query },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.query = $event.target.value
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "table-responsive" },
-                [
-                  _c(
-                    "table",
-                    { staticClass: "table table-bordered table-hover" },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        [
-                          _vm._l(_vm.students, function(student, index) {
-                            return _c(
+                        _c(
+                          "tbody",
+                          [
+                            _vm._l(_vm.students, function(student, index) {
+                              return _c(
+                                "tr",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.students.length,
+                                      expression: "students.length"
+                                    }
+                                  ],
+                                  key: student.id,
+                                  staticClass: "text-center"
+                                },
+                                [
+                                  _c("td", [_vm._v(_vm._s(index + 1))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(student.student))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(student.email))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(student.mobile))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(student.address))]),
+                                  _vm._v(" "),
+                                  _vm._m(1, true)
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _c(
                               "tr",
                               {
                                 directives: [
                                   {
                                     name: "show",
                                     rawName: "v-show",
-                                    value: _vm.students.length,
-                                    expression: "students.length"
+                                    value: !_vm.students.length,
+                                    expression: "! students.length"
                                   }
-                                ],
-                                key: student.id,
-                                staticClass: "text-center"
+                                ]
                               },
-                              [
-                                _c("td", [_vm._v(_vm._s(index + 1))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(student.student))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(student.email))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(student.mobile))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(student.address))]),
-                                _vm._v(" "),
-                                _vm._m(2, true)
-                              ]
+                              [_vm._m(2)]
                             )
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "tr",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: !_vm.students.length,
-                                  expression: "! students.length"
-                                }
-                              ]
-                            },
-                            [_vm._m(3)]
-                          )
-                        ],
-                        2
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.pagination.last_page > 1
-                    ? _c("pagination", {
-                        attrs: { pagination: _vm.pagination, offset: 10 },
-                        on: {
-                          paginate: function($event) {
-                            _vm.query === ""
-                              ? _vm.getStudents()
-                              : _vm.searchStudents()
+                          ],
+                          2
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.pagination.last_page > 1
+                      ? _c("pagination", {
+                          attrs: { pagination: _vm.pagination, offset: 10 },
+                          on: {
+                            paginate: function($event) {
+                              _vm.query === ""
+                                ? _vm.getStudents()
+                                : _vm.searchStudents()
+                            }
                           }
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ])
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ])
       ]),
@@ -39394,14 +39317,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c("strong", [_vm._v("Search By : ")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -39487,29 +39402,11 @@ var render = function() {
           _c(
             "select",
             {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.queryField,
-                  expression: "queryField"
-                }
-              ],
               staticClass: "form-control",
-              attrs: { id: "" },
+              attrs: { select: _vm.field, id: "" },
               on: {
                 change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.queryField = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+                  return _vm.selected($event)
                 }
               }
             },
@@ -39527,23 +39424,12 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "col-md-7" }, [
           _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.query,
-                expression: "query"
-              }
-            ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Search here..." },
-            domProps: { value: _vm.query },
+            domProps: { value: _vm.q },
             on: {
               input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.query = $event.target.value
+                return _vm.search($event)
               }
             }
           })

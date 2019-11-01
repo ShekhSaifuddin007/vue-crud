@@ -17,26 +17,31 @@
 
                     <div class="card-body">
 
-                        <form class="mb-3">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <strong>Search By : </strong>
-                                </div>
-                                <div class="col-md-3">
-                                    <select v-model="queryField" class="form-control" id="">
-                                        <option value="name">Name</option>
-                                        <option value="email">Email</option>
-                                        <option value="phone">Phone</option>
-                                        <option value="address">Address</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-7">
-                                    <input v-model="query" type="text" class="form-control" placeholder="Search here...">
-                                </div>
-                            </div>
-                        </form>
+<!--                        <form class="mb-3">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <strong>Search By : </strong>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-3">-->
+<!--                                    <select v-model="queryField" class="form-control" id="">-->
+<!--                                        <option value="name">Name</option>-->
+<!--                                        <option value="email">Email</option>-->
+<!--                                        <option value="phone">Phone</option>-->
+<!--                                        <option value="address">Address</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-7">-->
+<!--                                    <input v-model="query" type="text" class="form-control" placeholder="Search here...">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
 
-<!--                        <filter-form></filter-form>-->
+                        <filter-form
+                            :q="query"
+                            @searching="query = $event"
+                            :field="queryField"
+                            @selected="queryField = $event"
+                        />
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -84,8 +89,8 @@
                                 v-if="pagination.last_page > 1"
                                 :pagination="pagination"
                                 :offset="10"
-                                @paginate="query === '' ? getStudents() : searchStudents()">
-                            </pagination>
+                                @paginate="query === '' ? getStudents() : searchStudents()"
+                            />
 
                         </div>
                     </div>
@@ -95,11 +100,11 @@
 
 
         <!-- Modal -->
-        <student-modal></student-modal>
+        <student-modal/>
 
-        <vue-progress-bar></vue-progress-bar>
+        <vue-progress-bar/>
 
-        <vue-snotify></vue-snotify>
+        <vue-snotify/>
 
     </div>
 </template>
@@ -163,10 +168,9 @@
             searchStudents() {
                 this.$Progress.start();
 
-                axios.get('/api/search/students/' + this.queryField+ '/' + this.query+ '?page=' + this.pagination.current_page)
+                axios.get('/api/search/students/' + this.queryField+ '/' + this.query)
                     .then(response => {
                         this.students = response.data.data;
-                        this.pagination = response.data.meta;
 
                         this.$Progress.finish();
                     })
