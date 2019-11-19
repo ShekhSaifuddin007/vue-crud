@@ -1834,9 +1834,320 @@ module.exports = {
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentComponent.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: E:\\xampp\\htdocs\\crud_vue\\resources\\js\\components\\StudentComponent.vue: Unexpected token (172:0)\n\n\u001b[0m \u001b[90m 170 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 171 | \u001b[39m        components\u001b[33m:\u001b[39m{\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 172 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 173 | \u001b[39m            \u001b[90m// \"student-modal\" : Modal,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 174 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 175 | \u001b[39m            \u001b[32m\"student-modal\"\u001b[39m \u001b[33m:\u001b[39m \u001b[33mModal\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    at Parser.raise (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:6387:17)\n    at Parser.unexpected (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:7704:16)\n    at Parser.parseIdentifierName (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9592:18)\n    at Parser.parseIdentifier (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9570:23)\n    at Parser.parseMaybePrivateName (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8934:19)\n    at Parser.parsePropertyName (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9390:98)\n    at Parser.parseObjectMember (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9291:10)\n    at Parser.parseObj (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9225:25)\n    at Parser.parseExprAtom (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8855:28)\n    at Parser.parseExprSubscripts (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8483:23)\n    at Parser.parseMaybeUnary (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8463:21)\n    at Parser.parseExprOps (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8329:23)\n    at Parser.parseMaybeConditional (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8302:23)\n    at Parser.parseMaybeAssign (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8249:21)\n    at Parser.parseObjectProperty (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9352:101)\n    at Parser.parseObjPropValue (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9377:101)\n    at Parser.parseObjectMember (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9301:10)\n    at Parser.parseObj (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9225:25)\n    at Parser.parseExprAtom (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8855:28)\n    at Parser.parseExprSubscripts (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8483:23)\n    at Parser.parseMaybeUnary (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8463:21)\n    at Parser.parseExprOps (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8329:23)\n    at Parser.parseMaybeConditional (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8302:23)\n    at Parser.parseMaybeAssign (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:8249:21)\n    at Parser.parseExportDefaultExpression (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:11081:24)\n    at Parser.parseExport (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:10976:31)\n    at Parser.parseStatementContent (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:10004:27)\n    at Parser.parseStatement (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9900:17)\n    at Parser.parseBlockOrModuleBlockBody (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:10476:25)\n    at Parser.parseBlockBody (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:10463:10)\n    at Parser.parseTopLevel (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:9829:10)\n    at Parser.parse (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:11341:17)\n    at parse (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\parser\\lib\\index.js:11377:38)\n    at parser (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:166:34)\n    at normalizeFile (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:100:11)\n    at runSync (E:\\xampp\\htdocs\\crud_vue\\node_modules\\@babel\\core\\lib\\transformation\\index.js:44:43)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _partial_FilterForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./partial/FilterForm */ "./resources/js/components/partial/FilterForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//import Modal from './partial/ModalComponent';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    // "student-modal" : Modal,
+    "filter-form": _partial_FilterForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      query: '',
+      queryField: 'name',
+      students: [],
+      pagination: {
+        current_page: 1
+      },
+      form: new Form({
+        id: '',
+        name: '',
+        email: '',
+        phone: '',
+        address: ''
+      })
+    };
+  },
+  watch: {
+    query: function query(newQuery, oldQuery) {
+      newQuery === '' ? this.getStudents() : this.searchStudents();
+    }
+  },
+  mounted: function mounted() {
+    this.getStudents();
+  },
+  methods: {
+    getStudents: function getStudents() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get('/api/students?page=' + this.pagination.current_page).then(function (response) {
+        _this.students = response.data.data;
+        _this.pagination = response.data.meta;
+
+        _this.$Progress.finish();
+      })["catch"](function (e) {
+        console.log(e);
+
+        _this.$Progress.fail();
+      });
+    },
+    searchStudents: function searchStudents() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      axios.get('/api/search/students/' + this.queryField + '/' + this.query).then(function (response) {
+        _this2.students = response.data.data;
+
+        _this2.$Progress.finish();
+      })["catch"](function (e) {
+        console.log(e);
+
+        _this2.$Progress.fail();
+      });
+    },
+    refresh: function refresh() {
+      this.getStudents();
+      this.query = '';
+      this.queryField = 'name';
+      this.$snotify.success('Refreshed Successfully', 'Success');
+    },
+    create: function create() {
+      $('#createStudent').modal('show');
+    },
+    store: function store() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.busy = true;
+      this.form.post('/api/students').then(function (response) {
+        _this3.getStudents(); //$('#createStudent').modal('hide');
+
+
+        if (_this3.form.successful) {
+          _this3.$Progress.finish();
+
+          _this3.$snotify.success('Student create successfully', 'Success');
+        } else {
+          _this3.$Progress.fail();
+
+          _this3.$snotify.error('Something wrong, try again.!', 'Error');
+        }
+      })["catch"](function (e) {
+        _this3.$Progress.fail();
+
+        console.log(e);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partial/FilterForm.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partial/FilterForm.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "FilterForm",
+  props: ['field', 'q'],
+  methods: {
+    search: function search(_search) {
+      this.query = _search.target.value;
+      this.$emit('searching', this.query);
+    },
+    selected: function selected(field) {
+      this.queryField = field.target.value;
+      this.$emit('selected', this.queryField);
+    }
+  }
+});
 
 /***/ }),
 
@@ -39419,6 +39730,82 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partial/FilterForm.vue?vue&type=template&id=0513b255&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partial/FilterForm.vue?vue&type=template&id=0513b255&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "filter" } }, [
+    _c("form", { staticClass: "mb-3" }, [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { select: _vm.field, id: "" },
+              on: {
+                change: function($event) {
+                  return _vm.selected($event)
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "name" } }, [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "email" } }, [_vm._v("Email")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "phone" } }, [_vm._v("Phone")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "address" } }, [_vm._v("Address")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-7" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Search here..." },
+            domProps: { value: _vm.q },
+            on: {
+              input: function($event) {
+                return _vm.search($event)
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("strong", [_vm._v("Search By : ")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partial/PaginationComponent.vue?vue&type=template&id=b999294c&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partial/PaginationComponent.vue?vue&type=template&id=b999294c&scoped=true& ***!
@@ -53364,6 +53751,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentComponent_vue_vue_type_template_id_61ac4e6d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentComponent_vue_vue_type_template_id_61ac4e6d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/partial/FilterForm.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/partial/FilterForm.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FilterForm_vue_vue_type_template_id_0513b255_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FilterForm.vue?vue&type=template&id=0513b255&scoped=true& */ "./resources/js/components/partial/FilterForm.vue?vue&type=template&id=0513b255&scoped=true&");
+/* harmony import */ var _FilterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FilterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/partial/FilterForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FilterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FilterForm_vue_vue_type_template_id_0513b255_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FilterForm_vue_vue_type_template_id_0513b255_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0513b255",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/partial/FilterForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/partial/FilterForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/partial/FilterForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FilterForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partial/FilterForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/partial/FilterForm.vue?vue&type=template&id=0513b255&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/partial/FilterForm.vue?vue&type=template&id=0513b255&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterForm_vue_vue_type_template_id_0513b255_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FilterForm.vue?vue&type=template&id=0513b255&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partial/FilterForm.vue?vue&type=template&id=0513b255&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterForm_vue_vue_type_template_id_0513b255_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterForm_vue_vue_type_template_id_0513b255_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
