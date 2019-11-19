@@ -19,9 +19,9 @@ class StudentCollection extends ResourceCollection
             'data' => $this->collection->transform(function ($student) {
                 return [
                     'id' => $student->id,
-                    'student' => $student->name,
+                    'name' => $student->name,
                     'email' => $student->email,
-                    'mobile' => $student->phone,
+                    'phone' => $student->phone,
                     'address' => $student->address
                 ];
             }),
