@@ -22,7 +22,8 @@ class StudentCollection extends ResourceCollection
                     'name' => $student->name,
                     'email' => $student->email,
                     'phone' => $student->phone,
-                    'address' => $student->address
+                    'address' => $student->address,
+                    'image' => $student->image
                 ];
             }),
         ];

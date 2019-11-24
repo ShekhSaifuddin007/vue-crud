@@ -14,6 +14,9 @@ import Notify, { SnotifyPosition } from 'vue-snotify';
 
 import { Form, HasError, AlertError } from 'vform'
 
+import objectToFormData from 'object-to-formdata';
+
+window.objectToFormData = objectToFormData;
 window.Form = Form;
 
 /**
@@ -42,7 +45,7 @@ Vue.component(AlertError.name, AlertError);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const notifyOptions = {
+const NotifyOptions = {
     toast: {
         position: SnotifyPosition.rightTop
     }
@@ -63,7 +66,7 @@ const VueProgressBarOptions = {
 };
 
 Vue.use(VueProgressBar, VueProgressBarOptions);
-Vue.use(Notify, notifyOptions);
+Vue.use(Notify, NotifyOptions);
 
 
 const app = new Vue({

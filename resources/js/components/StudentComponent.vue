@@ -17,25 +17,6 @@
 
                     <div class="card-body">
 
-                        <!--                        <form class="mb-3">-->
-                        <!--                            <div class="row">-->
-                        <!--                                <div class="col-md-2">-->
-                        <!--                                    <strong>Search By : </strong>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="col-md-3">-->
-                        <!--                                    <select v-model="queryField" class="form-control" id="">-->
-                        <!--                                        <option value="name">Name</option>-->
-                        <!--                                        <option value="email">Email</option>-->
-                        <!--                                        <option value="phone">Phone</option>-->
-                        <!--                                        <option value="address">Address</option>-->
-                        <!--                                    </select>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="col-md-7">-->
-                        <!--                                    <input v-model="query" type="text" class="form-control" placeholder="Search here...">-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </form>-->
-
                         <filter-form
                             :q="query"
                             @searching="query = $event"
@@ -46,42 +27,47 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead class="bg-light">
-                                <tr class="text-center">
-                                    <th>SL</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th style="width: 150px">Action</th>
-                                </tr>
+                                    <tr class="text-center">
+                                        <th>SL</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Image</th>
+                                        <th style="width: 150px">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="text-center" v-show="students.length" v-for="(student, index) in students" :key="student.id">
-                                    <td>{{ index+1 }}</td>
-                                    <td>{{ student.name }}</td>
-                                    <td>{{ student.email }}</td>
-                                    <td>{{ student.phone }}</td>
-                                    <td>{{ student.address }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-sm">
-                                            <i class="fa fa-eye"></i>
-                                        </button>
-                                        <button @click="edit(student)" type="button" class="btn btn-success btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button @click="destroy(student)" type="button" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                    <tr class="text-center" v-if="students.length" v-for="(student, index) in students" :key="student.id">
+                                        <td>{{ index+1 }}</td>
+                                        <td>{{ student.name }}</td>
+                                        <td>{{ student.email }}</td>
+                                        <td>{{ student.phone }}</td>
+                                        <td>{{ student.address }}</td>
+                                        <td v-if="student.image">
+                                            <img :src="`./uploads/${student.image}`" alt="No Image" style="height: 80px; width: 80px">
+                                        </td>
+                                        <td v-else>No Image</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                            <button @click="edit(student)" type="button" class="btn btn-success btn-sm">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button @click="destroy(student)" type="button" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
 
-                                <tr v-show="! students.length">
-                                    <td colspan="6">
-                                        <div class="alert alert-warning text-center">
-                                            <strong>No Data Found</strong>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr v-else>
+                                        <td colspan="6">
+                                            <div class="alert alert-warning text-center">
+                                                <strong>No Data Found</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
@@ -101,60 +87,58 @@
 
         <!-- Modal -->
 
-<!--        <div class="modal fade" id="createStudent" tabindex="-1" role="dialog" aria-labelledby="studentModalTitle" aria-hidden="true">-->
-<!--            <div class="modal-dialog" role="document">-->
+        <student-modal :edit="editMode">
 
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="studentModalTitle">{{ editMode ? 'Update' : 'Create' }} Student</h5>-->
-<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                            <span aria-hidden="true">&times;</span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <form action="" @submit.prevent="editMode ? update() : store()" @keydown="form.onKeydown($event)">-->
+            <form @submit.prevent="editMode ? update() : store()" @keydown="form.onKeydown($event)" enctype="multipart/form-data">
 
-<!--                        <div class="modal-body">-->
+                <div class="modal-body">
 
-<!--                            <alert-error :form="form"/>-->
+                    <alert-error :form="form"/>
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="name" class="font-weight-bold">Name</label>-->
-<!--                                <input type="text" v-model="form.name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" id="name" name="name" placeholder="Your Name">-->
-<!--                                <has-error :form="form" field="name"></has-error>-->
-<!--                            </div>-->
+                    <div class="form-group">
+                        <label for="name" class="font-weight-bold">Name</label>
+                        <input type="text" v-model="form.name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" id="name" name="name" placeholder="Your Name">
+                        <has-error :form="form" field="name"></has-error>
+                    </div>
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="email" class="font-weight-bold">Email</label>-->
-<!--                                <input type="email" v-model="form.email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }" name="email" id="email" placeholder="Email hare">-->
-<!--                                <has-error :form="form" field="email"></has-error>-->
-<!--                            </div>-->
+                    <div class="form-group">
+                        <label for="email" class="font-weight-bold">Email</label>
+                        <input type="email" v-model="form.email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }" name="email" id="email" placeholder="Email hare">
+                        <has-error :form="form" field="email"></has-error>
+                    </div>
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="phone" class="font-weight-bold">Phone</label>-->
-<!--                                <input type="tel" v-model="form.phone" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" name="phone" id="phone" placeholder="Phone number">-->
-<!--                                <has-error :form="form" field="phone"></has-error>-->
-<!--                            </div>-->
+                    <div class="form-group">
+                        <label for="phone" class="font-weight-bold">Phone</label>
+                        <input type="tel" v-model="form.phone" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" name="phone" id="phone" placeholder="Phone number">
+                        <has-error :form="form" field="phone"></has-error>
+                    </div>
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="address" class="font-weight-bold">Address</label>-->
-<!--                                <textarea class="form-control" v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" name="address" id="address" placeholder="Your address"></textarea>-->
-<!--                                <has-error :form="form" field="address"></has-error>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="modal-footer">-->
-<!--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                            <button :disabled="form.busy" type="submit" class="btn btn-primary">{{ editMode ? 'Update' : 'Create' }}</button>-->
-<!--                        </div>-->
+                    <div class="form-group">
+                        <label for="address" class="font-weight-bold">Address</label>
+                        <textarea class="form-control" v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" name="address" id="address" placeholder="Your address"></textarea>
+                        <has-error :form="form" field="address"></has-error>
+                    </div>
 
-<!--                    </form>-->
-<!--                </div>-->
+                    <div class="form-group">
+                        <label for="image" class="font-weight-bold">Image</label>
+                        <input class="form-control" type="file"
+                               :class="{ 'is-invalid': form.errors.has('image') }"
+                               name="image" id="image" accept="image/*"
+                               @change="onFileSelected">
+                        <has-error :form="form" field="image"></has-error>
+                    </div>
 
-<!--            </div>-->
-<!--        </div>-->
+                    <div class="form-group" v-if="editMode">
+                        <img :src="`./uploads/${form.image}`" alt="" style="width: 80px; height: 80px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button :disabled="form.busy" type="submit" class="btn btn-primary" v-text="editMode ? 'Update' : 'Create'"></button>
+                </div>
 
-        <student-modal
-            :edit="editMode"
-        />
+            </form>
+        </student-modal>
 
 
         <vue-progress-bar/>
@@ -192,12 +176,13 @@
                     current_page : 1,
                 },
 
-                form: new Form({
+                form : new Form({
                     id: '',
                     name: '',
                     email: '',
                     phone: '',
                     address: '',
+                    image: null,
                 })
             }
         },
@@ -263,39 +248,46 @@
 
             create() {
                 this.editMode = false;
-                $('#createStudent').modal('show');
+                $('#modal').modal('show');
                 this.clearForm();
+            },
+
+            onFileSelected(event) {
+                this.form.image = event.target.files[0];
             },
 
             store() {
                 this.$Progress.start();
                 this.form.busy = true;
-                this.form.post('/api/students')
-                    .then(response => {
-                        this.getStudents();
-                        //$('#createStudent').modal('hide');
 
-                        if (this.form.successful) {
-                            this.clearForm();
-                            this.$Progress.finish();
-                            this.$snotify.success('Student create successfully', 'Success')
-                        } else {
-                            this.$Progress.fail();
-                            this.$snotify.error('Something wrong, try again.!', 'Error')
-                        }
-                    })
-                    .catch(e => {
+                this.form.post('/api/students', {
+                    transformRequest: [function (data, headers) {
+                       return objectToFormData(data)
+                   }],
+                }).then(response => {
+                    this.getStudents();
+                    //$('#createStudent').modal('hide');
+
+                    if (this.form.successful) {
+                        this.clearForm();
+                        this.$Progress.finish();
+                        this.$snotify.success('Student create successfully', 'Success')
+                    } else {
                         this.$Progress.fail();
-                        console.log(e)
-                    })
+                        this.$snotify.error('Something wrong, try again.!', 'Error')
+                    }
+                })
+                .catch(e => {
+                    this.$Progress.fail();
+                    console.log(e)
+                })
             },
 
             edit(student) {
-                // console.log(student)
                 this.editMode = true;
                 this.clearForm();
                 this.form.fill(student);
-                $('#createStudent').modal('show');
+                $('#modal').modal('show');
             },
 
             update() {
@@ -303,22 +295,22 @@
                 this.form.busy = true;
                 this.form.patch('/api/students/' + this.form.id)
                     .then(response => {
-                        this.getStudents();
-                        $('#createStudent').modal('hide');
+                    this.getStudents();
+                    $('#modal').modal('hide');
 
-                        if (this.form.successful) {
-                            this.clearForm();
-                            this.$Progress.finish();
-                            this.$snotify.success('Student update successfully', 'Success')
-                        } else {
-                            this.$Progress.fail();
-                            this.$snotify.error('Something wrong, try again.!', 'Error')
-                        }
-                    })
-                    .catch(e => {
+                    if (this.form.successful) {
+                        this.clearForm();
+                        this.$Progress.finish();
+                        this.$snotify.success('Student update successfully', 'Success')
+                    } else {
                         this.$Progress.fail();
-                        console.log(e)
-                    })
+                        this.$snotify.error('Something wrong, try again.!', 'Error')
+                    }
+                })
+                .catch(e => {
+                    this.$Progress.fail();
+                    console.log(e)
+                })
             },
 
             destroy(student) {
@@ -343,7 +335,7 @@
                                             this.getStudents();
                                             this.$Progress.finish();
                                             this.$snotify.success(
-                                                "Customer Successfully Deleted",
+                                                "Student Record Deleted",
                                                 "Success"
                                             );
                                         })

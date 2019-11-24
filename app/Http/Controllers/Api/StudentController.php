@@ -7,6 +7,8 @@ use App\Http\Resources\StudentResource;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class StudentController extends Controller
 {
@@ -27,7 +29,7 @@ class StudentController extends Controller
      *
      * @param Request $request
      * @return StudentResource
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -36,7 +38,14 @@ class StudentController extends Controller
             'email' => 'required|email|unique:students,email',
             'phone' => 'required',
             'address' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png',
         ]);
+        $image = $request->file('image');
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $image->store('/profile');
+        }
+
         $student = Student::create($data);
 
         return new StudentResource($student);
@@ -61,18 +70,27 @@ class StudentController extends Controller
      * @param Request $request
      * @param int $id
      * @return StudentResource
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function update(Request $request, $id)
     {
-//        return $request;
         $data = $this->validate($request, [
             'name' => 'required',
             'email' => "required|email|unique:students,email,{$id}",
             'phone' => 'required',
             'address' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png',
         ]);
         $student = Student::query()->findOrFail($id);
+
+        $image = $request->file('image');
+
+        if ($image) {
+            $updateImage = $image->store('/profile');
+            Storage::delete($student->image);
+
+            $data['image'] = $updateImage;
+        }
 
         $student->update($data);
 
