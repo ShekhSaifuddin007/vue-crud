@@ -8,6 +8,7 @@ use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class StudentController extends Controller
@@ -36,7 +37,7 @@ class StudentController extends Controller
         $data = $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:students,email',
-            'phone' => 'required',
+            'phone' => 'required|unique:students,phone',
             'address' => 'required',
             'image' => 'nullable|image|mimes:jpeg,jpg,png',
         ]);
@@ -77,7 +78,7 @@ class StudentController extends Controller
         $data = $this->validate($request, [
             'name' => 'required',
             'email' => "required|email|unique:students,email,{$id}",
-            'phone' => 'required',
+            'phone' => "required|unique:students,phone,{$id}",
             'address' => 'required',
             'image' => 'nullable|image|mimes:jpeg,jpg,png',
         ]);
@@ -85,11 +86,11 @@ class StudentController extends Controller
 
         $image = $request->file('image');
 
-        if ($image) {
-            $updateImage = $image->store('/profile');
+        if ($request->hasFile('image')) {
+            $imageUrl = $image->store('profile');
             Storage::delete($student->image);
 
-            $data['image'] = $updateImage;
+            $data['image'] = $imageUrl;
         }
 
         $student->update($data);
