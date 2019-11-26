@@ -27,47 +27,47 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead class="bg-light">
-                                    <tr class="text-center">
-                                        <th>SL</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
-                                        <th>Image</th>
-                                        <th style="width: 150px">Action</th>
-                                    </tr>
+                                <tr class="text-center">
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Image</th>
+                                    <th style="width: 150px">Action</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-center" v-if="students.length" v-for="(student, index) in students" :key="student.id">
-                                        <td>{{ index+1 }}</td>
-                                        <td>{{ student.name }}</td>
-                                        <td>{{ student.email }}</td>
-                                        <td>{{ student.phone }}</td>
-                                        <td>{{ student.address }}</td>
-                                        <td v-if="student.image">
-                                            <img :src="`./uploads/${student.image}`" alt="No Image" style="height: 80px; width: 80px">
-                                        </td>
-                                        <td v-else>No Image</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info btn-sm">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                            <button @click="edit(student)" type="button" class="btn btn-success btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button @click="destroy(student)" type="button" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                <tr class="text-center" v-if="students.length" v-for="(student, index) in students" :key="student.id">
+                                    <td>{{ index+1 }}</td>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.email }}</td>
+                                    <td>{{ student.phone }}</td>
+                                    <td>{{ student.address }}</td>
+                                    <td v-if="student.image">
+                                        <img :src="`./uploads/${student.image}`" alt="No Image" style="height: 80px; width: 80px">
+                                    </td>
+                                    <td v-else>No Image</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                        <button @click="edit(student)" type="button" class="btn btn-success btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button @click="destroy(student)" type="button" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
 
-                                    <tr v-else>
-                                        <td colspan="6">
-                                            <div class="alert alert-warning text-center">
-                                                <strong>No Data Found</strong>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tr v-else>
+                                    <td colspan="6">
+                                        <div class="alert alert-warning text-center">
+                                            <strong>No Data Found</strong>
+                                        </div>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
 
@@ -121,14 +121,14 @@
 
                     <div class="form-group">
                         <label for="image" class="font-weight-bold">Image</label>
-                        <input class="form-control" type="file"
+                        <input class="form-control" type="file" ref="selectImage"
                                :class="{ 'is-invalid': form.errors.has('image') }"
                                name="image" id="image" accept="image/*"
                                @change="onFileSelected">
                         <has-error :form="form" field="image"></has-error>
                     </div>
 
-                    <div class="form-group" v-if="editMode">
+                    <div class="form-group" v-if="editMode && form.image">
                         <img :src="`./uploads/${form.image}`" alt="" style="width: 80px; height: 80px;">
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                     email: '',
                     phone: '',
                     address: '',
-                    image: null,
+                    image: '',
                 })
             }
         },
@@ -252,8 +252,9 @@
                 this.clearForm();
             },
 
-            onFileSelected(event) {
-                this.form.image = event.target.files[0];
+            onFileSelected() {
+                let file = this.$refs.selectImage.files[0];
+                this.form.image = file;
             },
 
             store() {
@@ -262,8 +263,8 @@
 
                 this.form.post('/api/students', {
                     transformRequest: [function (data, headers) {
-                       return objectToFormData(data)
-                   }],
+                        return objectToFormData(data)
+                    }],
                 }).then(response => {
                     this.getStudents();
                     //$('#createStudent').modal('hide');
@@ -277,13 +278,14 @@
                         this.$snotify.error('Something wrong, try again.!', 'Error')
                     }
                 })
-                .catch(e => {
-                    this.$Progress.fail();
-                    console.log(e)
-                })
+                    .catch(e => {
+                        this.$Progress.fail();
+                        console.log(e)
+                    })
             },
 
             edit(student) {
+                console.log(student);
                 this.editMode = true;
                 this.clearForm();
                 this.form.fill(student);
@@ -293,24 +295,30 @@
             update() {
                 this.$Progress.start();
                 this.form.busy = true;
-                this.form.patch('/api/students/' + this.form.id)
-                    .then(response => {
-                    this.getStudents();
-                    $('#modal').modal('hide');
 
-                    if (this.form.successful) {
-                        this.clearForm();
-                        this.$Progress.finish();
-                        this.$snotify.success('Student update successfully', 'Success')
-                    } else {
+                this.form.post('/api/students/' + this.form.id, {
+                    transformRequest: [function (data, headers) {
+                        data['_method'] = 'PATCH';
+                        return objectToFormData(data)
+                    }],
+                })
+                    .then(response => {
+                        this.getStudents();
+                        $('#modal').modal('hide');
+
+                        if (this.form.successful) {
+                            this.clearForm();
+                            this.$Progress.finish();
+                            this.$snotify.success('Student update successfully', 'Success')
+                        } else {
+                            this.$Progress.fail();
+                            this.$snotify.error('Something wrong, try again.!', 'Error')
+                        }
+                    })
+                    .catch(e => {
                         this.$Progress.fail();
-                        this.$snotify.error('Something wrong, try again.!', 'Error')
-                    }
-                })
-                .catch(e => {
-                    this.$Progress.fail();
-                    console.log(e)
-                })
+                        console.log(e)
+                    })
             },
 
             destroy(student) {

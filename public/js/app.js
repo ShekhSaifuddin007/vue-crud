@@ -2012,7 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         phone: '',
         address: '',
-        image: null
+        image: ''
       })
     };
   },
@@ -2069,8 +2069,9 @@ __webpack_require__.r(__webpack_exports__);
       $('#modal').modal('show');
       this.clearForm();
     },
-    onFileSelected: function onFileSelected(event) {
-      this.form.image = event.target.files[0];
+    onFileSelected: function onFileSelected() {
+      var file = this.$refs.selectImage.files[0];
+      this.form.image = file;
     },
     store: function store() {
       var _this3 = this;
@@ -2103,6 +2104,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     edit: function edit(student) {
+      console.log(student);
       this.editMode = true;
       this.clearForm();
       this.form.fill(student);
@@ -2113,7 +2115,12 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$Progress.start();
       this.form.busy = true;
-      this.form.patch('/api/students/' + this.form.id).then(function (response) {
+      this.form.post('/api/students/' + this.form.id, {
+        transformRequest: [function (data, headers) {
+          data['_method'] = 'PATCH';
+          return objectToFormData(data);
+        }]
+      }).then(function (response) {
         _this4.getStudents();
 
         $('#modal').modal('hide');
@@ -39739,6 +39746,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("input", {
+                      ref: "selectImage",
                       staticClass: "form-control",
                       class: { "is-invalid": _vm.form.errors.has("image") },
                       attrs: {
@@ -39757,7 +39765,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _vm.editMode
+                _vm.editMode && _vm.form.image
                   ? _c("div", { staticClass: "form-group" }, [
                       _c("img", {
                         staticStyle: { width: "80px", height: "80px" },
