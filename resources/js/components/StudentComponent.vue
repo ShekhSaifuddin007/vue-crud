@@ -298,6 +298,8 @@
 
                 this.form.post('/api/students/' + this.form.id, {
                     transformRequest: [function (data, headers) {
+					
+					    //data send will 'PUT' or 'PATCH'
                         data['_method'] = 'PATCH';
                         return objectToFormData(data)
                     }],
